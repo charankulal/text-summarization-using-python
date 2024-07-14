@@ -1,1 +1,4 @@
 .venv/*
+text_summarizer/text_summarizer/__pycache__/*
+text_summarizer/base/__pycache__/*
+text_summarizer/base/migrations/*
