@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from summarizer_models.extractive_summary import extractive_summary_func
 
 
 def home_page(request):
@@ -60,8 +61,28 @@ def user_logout(request):
 
 
 @login_required(login_url="user-login")
-def extractive_summary(request):
-    pass
+def extractive_summary_function(request):
+    summarized_text = None
+    input_text = None
+    custom_percentage = None
+    if request.method == "POST":
+        input_text = request.POST.get("input_text")
+        custom_percentage = int(request.POST.get("custom_percentage"))
+        summarized_text = extractive_summary_func(input_text, custom_percentage / 100)
+        length=len(input_text.split(' '))
+        length_summary=len(summarized_text.split(' '))
+
+    return render(
+        request,
+        "base/ext.html",
+        {
+            "summarized_text": summarized_text,
+            "input_text": input_text,
+            "percentage": custom_percentage,
+            "length":length,
+            "length_summary":length_summary
+        },
+    )
 
 
 @login_required(login_url="user-login")

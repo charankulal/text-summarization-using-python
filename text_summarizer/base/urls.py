@@ -7,6 +7,6 @@ urlpatterns = [
     path("user-register", views.user_register, name="user-register"),
     path("dashboard", views.dashboard, name="dashboard"),
     path("user-logout", views.user_logout, name="user-logout"),
-    path("ext", views.extractive_summary, name="ext"),
+    path("ext", views.extractive_summary_function, name="ext"),
     path("abs", views.abstractive_summary, name="abs"),
 ]

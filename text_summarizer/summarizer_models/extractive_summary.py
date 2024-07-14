@@ -12,13 +12,6 @@ import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
 
-text = """
-Fish are aquatic animals that are typically cold-blooded and have gills throughout their lives.
-They are found in both freshwater and saltwater environments, ranging from small ponds to the deep ocean.
-Fish have a wide variety of shapes, sizes, and colors, adapted to their diverse habitats.
-They play a crucial role in aquatic ecosystems, serving as both predators and prey.
-Fish are also important to humans for food, recreational fishing, and as pets.
-"""
 
 def compute_tfidf_scores(sentences):
     tfidf_vectorizer = TfidfVectorizer()
@@ -28,11 +21,10 @@ def compute_tfidf_scores(sentences):
 def cosine_sim(matrix):
     return cosine_similarity(matrix, matrix)
 
-def summarize_text(text, summary_ratio=0.3):
+def extractive_summary_func(text, summary_ratio=0.3):
     nlp = spacy.load("en_core_web_sm")
     doc = nlp(text)
-    
-    # Tokenize and create word frequency dictionary
+
     word_frequency = {}
     pos_weight = {"NOUN": 2, "VERB": 1.5, "ADJ": 1, "ADV": 1}
     for word in doc:
@@ -43,10 +35,8 @@ def summarize_text(text, summary_ratio=0.3):
     max_frequency = max(word_frequency.values())
     word_frequency = {word: freq / max_frequency for word, freq in word_frequency.items()}
 
-
     sentences = list(doc.sents)
     sentences_text = [sent.text for sent in sentences]
-
 
     sent_scores = {}
     for sent in sentences:
@@ -67,10 +57,3 @@ def summarize_text(text, summary_ratio=0.3):
 
     return " ".join([sent.text for sent in summary])
 
-# Summarize the text
-summary = summarize_text(text)
-
-print("Original text \n", text)
-print("\n\nSummary \n", summary)
-print("Length of original text:", len(text.split()), "words")
-print("Length of Summary text:", len(summary.split()), "words")
