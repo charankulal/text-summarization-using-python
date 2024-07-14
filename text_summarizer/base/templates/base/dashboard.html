@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load i18n widget_tweaks %}
+
+{% block content %}
+<h1 class="my-4">Welcome, {{ request.user.username }}</h1>
+
+<div class="container">
+    <h2 class="text-center mt-4">Choose one of the Text Summarization Methods:</h2>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card p-4 shadow bg-body-tertiary">
+                <h3 class="text-center">Extractive Summarization Method</h3>
+                <p class="fs-6 text-center fw-semibold">The extractive summarization method selects and combines key sentences from the original text,
+                    maintaining their original wording.</p>
+                    <div class="text-center">
+                        <a href="{% url 'ext' %}" class="btn btn-dark">Click Here</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card p-4 shadow bg-body-tertiary">
+                <h3 class="text-center">Abstractive Summarization Method</h3>
+                <p class="fs-6 text-center fw-semibold">The abstractive summarization method generates new sentences, rephrasing and condensing the original
+                    text to create a concise summary.</p>
+                    <div class="text-center">
+                        <a href="{% url 'abs' %}" class="btn btn-dark">Click Here</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

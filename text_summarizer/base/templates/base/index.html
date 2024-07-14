@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to Text Summarizer!</h1>
+    <p class="lead">A comprehensive text summarizer combines both extractive and abstractive techniques to deliver
+        concise, relevant summaries. Extractive summarization selects key sentences directly from the source text based
+        on scoring algorithms like TF-IDF and cosine similarity, ensuring the most important information is retained.
+        Abstractive summarization, powered by advanced transformer models like BERT or T5, generates new sentences that
+        rephrase and condense the original content, providing a coherent and fluid summary. This hybrid approach
+        leverages the strengths of both methods, ensuring accuracy, context, and readability, making it an invaluable
+        tool for efficiently digesting large volumes of text.</p>
+    <p class="fw-bold fs-5">Register or login to use Text Summarizer</p>
+    <hr class="my-4">
+    <div class="container">
+        <div class="row offset-3 mt-5">
+            <div class="col-4 mb-3">
+                <div class="card bg-light border border-dark rounded">
+                    <div class="card-body">
+                        <h5 class="card-title fs-3 fw-bold">Register</h5>
+                        <p class="card-text fs-5">Don't have an account? Create an account to start using Text Summarizer Tool</p>
+                        <a href="{% url 'user-register' %}" class="btn btn-primary btn-lg btn-block">Register</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 mb-3">
+                <div class="card bg-light border border-dark rounded">
+                    <div class="card-body">
+                        <h5 class="card-title fs-3 fw-bold">Login</h5>
+                        <p class="card-text fs-5 ">Already have an account? Login to access the text summarizer
+                            tool.</p>
+                        <a href="{% url 'user-login' %}" class="btn btn-secondary btn-lg btn-block">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
