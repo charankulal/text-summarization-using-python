@@ -6,6 +6,7 @@ from django.contrib.auth.models import auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from summarizer_models.extractive_summary import extractive_summary_func
+from summarizer_models.abstractive_summary import abstractive_summarization
 
 
 def home_page(request):
@@ -87,4 +88,24 @@ def extractive_summary_function(request):
 
 @login_required(login_url="user-login")
 def abstractive_summary(request):
-    pass
+    summarized_text = None
+    input_text = None
+    length=0
+    length_summary=0
+    if request.method == "POST":
+        input_text = request.POST.get("input_text")
+        length=len(input_text.split(' '))
+        summarized_text = abstractive_summarization(input_text,min_length=int(length*0.4))
+        
+        length_summary=len(summarized_text.split(' '))
+
+    return render(
+        request,
+        "base/abs.html",
+        {
+            "summarized_text": summarized_text,
+            "input_text": input_text,
+            "length":length,
+            "length_summary":length_summary
+        },
+    )

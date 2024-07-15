@@ -1,25 +1,20 @@
 {% extends 'base.html' %} {% load i18n %} {% block content %}
 <div class="container row">
     <div class="col-6 mt-3 border-end">
-        <h2>Extractive Summarization Method</h2>
-        <form method="POST" action="{% url 'ext' %}">
+        <h2>Abstractive Summarization Method</h2>
+        <form method="POST" action="{% url 'abs' %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="inputText" class="mt-2">Enter Text:</label>
                 {% if input_text %}
-                <textarea class="form-control" id="inputText" name="input_text" rows="10" required>
+                <textarea class="form-control" id="inputText" name="input_text" rows="13" required>
 {{input_text}}</textarea>
 
                 {% else %}
                 <textarea class="form-control" id="inputText" name="input_text" rows="15" required></textarea>
                 {% endif %}
             </div>
-            <div class="form-group mt-3">
-                <label for="customPercentage">Custom Percentage:</label>
 
-                <input type="number" class="form-control" id="customPercentage" name="custom_percentage" min="1"
-                    max="100" required />
-            </div>
             <button type="submit" class="btn btn-primary mt-3">Summarize</button>
         </form>
     </div>
